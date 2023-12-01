@@ -1,3 +1,5 @@
+from typing import List
+
 # крестики-нолики с использованием ООП
 
 
@@ -30,7 +32,7 @@ class Player:
         self.symbol = symbol
 
     # метод реализующий ход игрока на игровом поле
-    def move(self):
+    def move(self, board: Board) -> Board:
         while True:
             cell = input(
                 f"{self.name}({self.symbol}), введите номер клетки от 1 до 9, для осуществления хода: "
@@ -38,8 +40,8 @@ class Player:
             if cell.isdigit() and 1 <= int(cell) <= 9:
                 cell = int(cell) - 1
                 # 'game' здесь - это ссылка на объект класса TicTacToe, который мы создали для начала игры
-                if game.board.cells[cell] == " ":
-                    game.board.cells[cell] = self.symbol
+                if board.cells[cell] == " ":
+                    board.cells[cell] = self.symbol
                     break
                 else:
                     print("Клетка занята. Выберите иное поле.")
@@ -67,7 +69,7 @@ class TicTacToe:
         current_player = self.player1
         while True:
             self.board.display()
-            current_player.move()
+            current_player.move(self.board)
             if self.check_win(current_player):
                 print(f"Игрок {current_player.name}({current_player.symbol}) победил!")
                 self.board.display()
@@ -81,7 +83,7 @@ class TicTacToe:
             )
 
     # метод запускается после хода игрока, чтоыб проверить, не произошла ли победа
-    def check_win(self, current_player):
+    def check_win(self, current_player: Player) -> Player:
         win_conditions = (
             (0, 1, 2),
             (3, 4, 5),
@@ -100,6 +102,7 @@ class TicTacToe:
     # метод запускается после хода игрока, чтобы проверить, не произошла ли ничья в игре
     def check_draw(self):
         return all(cell != " " for cell in self.board.cells)
+
 
 # создание игровой сессии
 game = TicTacToe("Вася", "Василиса")
