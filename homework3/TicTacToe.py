@@ -32,7 +32,7 @@ class Player:
         self.symbol = symbol
 
     # метод реализующий ход игрока на игровом поле
-    def move(self, board: Board) -> Board:
+    def move(self, board: Board) -> None:
         while True:
             cell = input(
                 f"{self.name}({self.symbol}), введите номер клетки от 1 до 9, для осуществления хода: "
@@ -83,7 +83,7 @@ class TicTacToe:
             )
 
     # метод запускается после хода игрока, чтоыб проверить, не произошла ли победа
-    def check_win(self, current_player: Player) -> Player:
+    def check_win(self, current_player: Player) -> bool:
         win_conditions = (
             (0, 1, 2),
             (3, 4, 5),
