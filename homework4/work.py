@@ -30,8 +30,11 @@ def pirson_correlation(list1, list2):
     M_x = sum(list1) / list_length
     M_y = sum(list2) / list_length
 
+    # вычитываем знаменатель функции Пирсона
     denumerator_x = sum([(xi - M_x) ** 2 for xi in list1]) / len(list1)
     denumerator_y = sum([(yi - M_y) ** 2 for yi in list2]) / len(list2)
+
+    # высчитываем числитель функции Пирсона
     numerator = sum([(xi - M_x) * (yi - M_y) for xi, yi in zip(list1, list2)]) / len(
         list1
     )
